@@ -3,7 +3,7 @@
 
 #include <vector>
 
-namespace snd
+namespace nf
 {
 
 class MathUtils

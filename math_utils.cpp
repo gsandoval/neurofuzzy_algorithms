@@ -1,23 +1,28 @@
-﻿#include "math_utils.h"
-
+﻿#include <cmath>
 #include <algorithm>
-#include <cmath>
+
+#include "math_utils.h"
 
 using namespace std;
 
-namespace snd
+namespace nf
 {
 
 vector<double> MathUtils::CalculateAverageVector(vector<vector<double> > input)
 {
-    vector<double> average;
+    if (input.empty()) {
+	return vector<double>();
+    }
+    vector<double> average(input[0].size());
+    fill(average.begin(), average.begin() + input[0].size(), 0);
     for (unsigned int i = 0; i < input.size(); ++i) {
-	average.push_back(0);
 	for (unsigned int j = 0; j < input[i].size(); ++j) {
-	    average[i] += input[i][j];
+	    average[j] += input[i][j];
 	}
     }
-    for_each(average.begin(), average.end(), [&input](double v) -> double { return v / input.size(); });
+    for (unsigned int i = 0; i < average.size(); ++i) {
+	average[i] /= input.size();
+    }
     return average;
 }
 

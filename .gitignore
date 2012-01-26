@@ -3,3 +3,8 @@ NeuroFuzzyClassAlgorithms.creator
 NeuroFuzzyClassAlgorithms.creator.user
 NeuroFuzzyClassAlgorithms.files
 NeuroFuzzyClassAlgorithms.includes
+a.exe
+euclidean_distance_classifier.o
+math_utils.o
+problem01.o
+problem01.exe

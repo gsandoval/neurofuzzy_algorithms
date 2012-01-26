@@ -3,7 +3,7 @@
 
 using namespace std;
 
-namespace snd
+namespace nf
 {
 
 void EuclideanDistanceClassifier::Train(map<string, vector<vector<double> > > training_vectors)
