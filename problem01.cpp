@@ -49,12 +49,15 @@ int main(int argc, char* argv[])
     string filename = opts["f"];
     bool verbose = opts.find("v") != opts.end();
     bool veryverbose = opts.find("vv") != opts.end();
+	bool first_on_list = opts.find("l") != opts.end();
+	int samples_taken = 0;
     if (veryverbose) {
 	verbose = true;
     }
     fstream file(filename);
 
     map<string, vector<vector<double> > > universe;
+	map<string, vector<vector<double> > > sample_data;
 
     while (!file.eof()) {
 	string name;
@@ -65,6 +68,9 @@ int main(int argc, char* argv[])
 	if (universe.find(name) == universe.end()) {
 	    universe[name] = vector<vector<double> >();
 	}
+	if (first_on_list && sample_data.find(name) == sample_data.end()) {
+		sample_data[name] = vector<vector<double> >();
+	}
 	vector<vector<double> > *identity_set = &universe[name];
 	vector<double> curr_vector;
 	double curr_value;
@@ -73,10 +79,14 @@ int main(int argc, char* argv[])
 	    curr_vector.push_back(curr_value);
 	}
 	identity_set->push_back(curr_vector);
+	if (first_on_list && samples_taken < samples_per_class) {
+	samples_taken++;
+	sample_data[name].push_back(curr_vector);
+	}
     }
-
+	
+	if (!first_on_list) {
     cout << "Picking sample data. Lazily taking the first " << samples_per_class << " of each class." << endl;
-    map<string, vector<vector<double> > > sample_data;
     for (auto it = universe.begin(); it != universe.end(); ++it) {
 	vector<vector<double> > s;
 	for (int i = 0; i < samples_per_class; ++i) {
@@ -84,6 +94,7 @@ int main(int argc, char* argv[])
 	}
 	sample_data[it->first] = s;
     }
+	}
     cout << "Performing training using " << samples_per_class << " samples per class." << endl;
     nf::EuclideanDistanceClassifier classifier;
     classifier.Train(sample_data);
