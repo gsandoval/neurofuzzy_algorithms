@@ -8,3 +8,7 @@ euclidean_distance_classifier.o
 math_utils.o
 problem01.o
 problem01.exe
+perceptrons.exe
+perceptron.o
+perceptron_test.o
+adaline.o
