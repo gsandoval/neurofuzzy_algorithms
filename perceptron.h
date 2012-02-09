@@ -10,14 +10,14 @@ class Perceptron
 {
 public:
     enum ActivationFunction {
-	Step, Lineal
+	Step, Linear
     };
 protected:
     double bias;
     std::vector<double> weights;
     ActivationFunction af;
     double StepActivationFunction(double v);
-    double LinealActivationFunction(double v);
+    double LinearActivationFunction(double v);
 public:
     Perceptron(unsigned int input_size, ActivationFunction af = Step);
     Perceptron(std::vector<double> weights, double bias, ActivationFunction af = Step);

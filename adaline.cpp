@@ -1,5 +1,4 @@
 #include <cmath>
-#include <iostream>
 
 #include "adaline.h"
 
@@ -8,12 +7,12 @@ using namespace std;
 namespace nf
 {
 
-Adaline::Adaline(double _learning_rate, unsigned int input_size) : Perceptron(input_size, Lineal),
+Adaline::Adaline(double _learning_rate, unsigned int input_size) : Perceptron(input_size, Linear),
     learning_rate(_learning_rate)
 {
 }
 
-Adaline::Adaline(double _learning_rate, std::vector<double> weights, double bias) : Perceptron(weights, bias, Lineal),
+Adaline::Adaline(double _learning_rate, std::vector<double> weights, double bias) : Perceptron(weights, bias, Linear),
     learning_rate(_learning_rate)
 {
 }
@@ -33,7 +32,7 @@ unsigned int Adaline::Train(vector<vector<double> > vv, unsigned int max_epochs)
 	for (unsigned int i = 0; i < vv.size(); ++i) {
 	    double d = Classify(vv[i]);
 	    double expected = vv[i][vv[i].size() - 1];
-	    for (unsigned int j = 0; j < vv[i].size() - 1; ++j) { // last value is the expected outcome
+	    for (unsigned int j = 0; j < weights.size(); ++j) { // last value is the expected outcome
 		weights[j] = weights[j] + learning_rate * (expected - d) * vv[i][j];
 		epoch_error += pow(expected - d, 2);
 	    }

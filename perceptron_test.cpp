@@ -15,6 +15,7 @@ int main(int argc, char * argv[])
 
     nf::Perceptron p(2);
     sweights = p.GetWeights();
+    cout << "******************" << endl;
     cout << "initial weights: ";
     for (unsigned int i = 0; i < sweights.size(); ++i) {
 	cout << sweights[i] << (i != sweights.size() -1 ? ", " : "");
@@ -30,8 +31,9 @@ int main(int argc, char * argv[])
     }
     cout << "bias: " << fbias << endl;
 
-    nf::Adaline a(0.01, 2);
+    nf::Adaline a(0.1, 2);
     sweights = a.GetWeights();
+    cout << "******************" << endl;
     cout << "initial weights: ";
     for (unsigned int i = 0; i < sweights.size(); ++i) {
 	cout << sweights[i] << (i != sweights.size() -1 ? ", " : "");
@@ -48,8 +50,9 @@ int main(int argc, char * argv[])
     }
     cout << "bias: " << fbias << ", global error: " << global_error << endl;
 
-    a = nf::Adaline(0.2, 3);
+    a = nf::Adaline(0.4, 3);
     sweights = a.GetWeights();
+    cout << "******************" << endl;
     cout << "initial weights: ";
     for (unsigned int i = 0; i < sweights.size(); ++i) {
 	cout << sweights[i] << (i != sweights.size() -1 ? ", " : "");
